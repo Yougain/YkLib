@@ -436,7 +436,7 @@ class String
 	  identical? pipe? readable? readable_real? setgid? setuid? socket? sticky? symlink? writable?
 	  writable_real? zero? setpid try_lock_sh lock_ex lock_sh locked_ex? locked_sh?
 	  readable_file? writable_file? executable_file?
-	  lexist? lmtime exist? relative_path normalize_path is_in is_in? sibling resymlink resolv_link
+	  lexist? lmtime relative_path normalize_path is_in is_in? sibling resymlink resolv_link
 	  fifo? mknod mkfifo mksock try_lock_ex which 
 	  partial_path delext 
 	}.each do |e|
