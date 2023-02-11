@@ -390,9 +390,6 @@ class File
 	def self.lexist? (arg)
 		File.symlink?(arg) || File.exist?(arg)
 	end
-	def self.exist? (arg)
-		File.symlink?(arg) || File.exist?(arg)
-	end
 	def self.lmtime (arg)
 		File.lstat(arg).mtime
 	end
