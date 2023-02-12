@@ -593,7 +593,7 @@ module FileUtils
   class Entry_
 	begin
 		begin
-			File.lchmod(0644, "/")
+			File.lchmod(0555, "/")
 		rescue NotImplementedError
 			def File.lchmod (*args)
 			end
