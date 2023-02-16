@@ -1260,8 +1260,8 @@ class << Object.new
 						#STDERR.write fmode.inspect + "\n"
 						opts = delete_open_opts(org.opts)
 						pid_label = opts.delete :pid
-						STDERR.write e.inspect.ln
-						STDERR.write self.inspect.ln
+						#STDERR.write e.inspect.ln
+						#STDERR.write self.inspect.ln
 						File.open path, fmode, **opts do |fp|
 							if pid_label && fp.respond_to?(:pid)
 								require 'Yk/misc_tz'
