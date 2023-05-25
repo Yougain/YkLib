@@ -87,7 +87,26 @@ DEBUG_FILES = {}
 				end
 			}
 		end
-		def self.p *exprs
+		@@onStack = []
+		def self.on
+			@@onStack.empty? ? @@onStack.push(true) : (@@onStack[-1] ||= true)
+		end
+		def self.off
+			@@onStack.empty? ? @@onStack.push(false) : (@@onStack[-1] &&= false)
+		end
+		def self.p *exprs, &bl
+			if bl
+				@@onStack.push exprs[0]
+				begin
+					bl.call
+				ensure
+					@@onStack.pop
+				end
+				return TZDebug.new
+			end
+			if !@@onStack.empty? && !@@onStack[-1]
+				return TZDebug.new
+			end
 			noLn = noTitle = false
 			if Escseq::Colors.index exprs[0] 
 				col = exprs.shift
@@ -422,8 +441,8 @@ DEBUG_FILES = {}
 	end
 
 
-	def p *exprs
-		TZDebug.p *exprs
+	def p *exprs, &bl
+		TZDebug.p *exprs, &bl
 	end
 
 
