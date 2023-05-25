@@ -71,7 +71,9 @@ DEBUG_FILES = {}
 					ensure
 						STDERR.write Default
 						STDERR.write BgDefault
-						STDERR.write "\r\n"
+						if !bl
+							STDERR.write "\r\n"
+						end
 					end
 				end
 				def bg#{capCol} *args, &bl
@@ -82,7 +84,9 @@ DEBUG_FILES = {}
 					ensure
 						STDERR.write Default
 						STDERR.write BgDefault
-						STDERR.write "\r\n"
+						if !bl
+							STDERR.write "\r\n"
+						end
 					end
 				end
 			}
