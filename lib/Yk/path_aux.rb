@@ -881,3 +881,17 @@ class Array
 		File.open(self, *args, &bl)
 	end
 end
+
+
+if_module :YAML do
+	class<<self;self;end.class_eval do
+		alias __load__ load
+		def load *args
+			c = class << args[0];self;end
+			c.undef_method :read
+			__load__ *args
+		end
+	end
+end
+
+

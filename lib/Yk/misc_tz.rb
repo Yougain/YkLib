@@ -3,6 +3,33 @@
 #require 'continuation'
 require 'binding_of_caller'
 
+YK_MODULE_HOOK = Hash.new{|h, k| h[k] = []}
+
+def if_class mname, &bl
+	YK_MODULE_HOOK[mname].push bl
+end
+
+def if_module mname, &bl
+	if_class mname, &bl
+end
+
+module Kernel
+	__seed__ = rand(10000000000)
+	eval %{
+		alias __require__#{__seed__} require
+		def require *to_require
+			get_defs = ->{YK_MODULE_HOOK.each_key.select{::Kernel::const_defined?(_1)}}
+			pre = get_defs[]
+			__require__#{__seed__} *to_require
+			(get_defs[] - pre).each do |smod|
+				YK_MODULE_HOOK[smod].each do |bl|
+					Kernel.const_get(smod).module_eval &bl
+				end
+			end
+		end
+	}
+end
+
 
 def die msg = nil
 	if msg
