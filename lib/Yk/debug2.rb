@@ -153,7 +153,7 @@ DEBUG_FILES = {}
 									out = nil
 									noLn = true
 								end
-							elsif /\bdo$/
+							when /\bdo$/
 								col = func
 								noTitle = true
 								out = nil
