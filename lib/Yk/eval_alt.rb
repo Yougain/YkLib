@@ -154,7 +154,7 @@ class Module
 			if expr && fname == "(eval)"
 				fname, lno = binding.of_caller(1).source_location
 			end
-			prc.call expr, fname, lno, &bl
+			prc.call expr, fname, lno, bl
 		end
 	end
 end
