@@ -6,8 +6,8 @@ require 'binding_of_caller'
 YK_MODULE_HOOK = Hash.new{|h, k| h[k] = []}
 
 def if_class mname, &bl
-	if Kernel.const_defined?(smod)
-		Kernel.const_get(smod).module_eval &bl
+	if Kernel.const_defined?(mname)
+		Kernel.const_get(mname).module_eval &bl
 	else
 		YK_MODULE_HOOK[mname].push bl
 	end

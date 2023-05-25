@@ -64,21 +64,21 @@ DEBUG_FILES = {}
 			class_eval %{
 				#{capCol} = "\\x1b[#{i + 30}m"
 				Bg#{capCol} = "\\x1b[#{i + 40}m"
-				def #{col} *args
+				def #{col} *args, &bl
 					STDERR.write #{capCol}
 					begin
-						TZDebug.p *args
+						TZDebug.p *args, &bl
 					ensure
 						STDERR.write Default
 						STDERR.write BgDefault
 						STDERR.write "\r\n"
 					end
 				end
-				def bg#{capCol} *args
+				def bg#{capCol} *args, &bl
 					STDERR.write Bg#{capCol}
 					STDERR.write Black
 					begin
-						TZDebug.p *args
+						TZDebug.p *args, &bl
 					ensure
 						STDERR.write Default
 						STDERR.write BgDefault
@@ -98,11 +98,11 @@ DEBUG_FILES = {}
 			if bl
 				@@onStack.push exprs[0]
 				begin
-					bl.call
+					ret = bl.call
 				ensure
 					@@onStack.pop
 				end
-				return TZDebug.new
+				return ret
 			end
 			if !@@onStack.empty? && !@@onStack[-1]
 				return TZDebug.new
@@ -141,8 +141,10 @@ DEBUG_FILES = {}
 					when /^\.([\w]+)\b/
 #						noTiltle = true
 #						noLn = true
+						func = $1
 						if exprs.size == 0
-							if $'.strip_comment == ""
+							case $'.strip_comment
+							when ""
 								if caller_locations(1)[0].path == "(eval)"
 									out = "***"
 									noTitle = true
@@ -151,8 +153,13 @@ DEBUG_FILES = {}
 									out = nil
 									noLn = true
 								end
+							elsif /\bdo$/
+								col = func
+								noTitle = true
+								out = nil
+								noLn = true
 							else
-								col = $1
+								col = func
 								out = nil
 								noLn = true
 							end
