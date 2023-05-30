@@ -31,13 +31,9 @@ require 'Yk/misc_tz'
 		fmode = mode.to_fmode
 		pid = nil
 		handleIO = Proc.new do |h|
-			p
 			pid && h.__defun__(:pid, pid)
-			p
 			if block_given?
-				p
 				begin
-			#		p h
 					res = yield h
 				ensure
 					h.closed? || h.close
@@ -54,7 +50,6 @@ require 'Yk/misc_tz'
 					res
 				end
 			else
-				p
 				res = h
 			end
 		end
@@ -222,26 +217,11 @@ require 'Yk/misc_tz'
 								end
 							end
 							ret = __org_open_____(f, mstd, perm)
-							if $startDeb
-								p.red ret, f, fmode
-							end
 							ret
 						elsif fmode.sys? || fmode.nonblock?
-							if $startDeb
-								p f, fmode
-								p `ls -la #{f}`
-								p f._e?
-								p IO.sysopen(f, File::WRONLY|File::NONBLOCK)
-							end
 							ret = IO.for_fd(IO.sysopen(f, m.to_i | File::NONBLOCK, perm), m.std_mode)
-							if $startDeb
-								p.red f, fmode
-							end
 							ret
 						else
-							if $startDeb
-								p f, fmode
-							end
 							fp = __org_open_____ f, m.std_mode, perm
 						end
 					end

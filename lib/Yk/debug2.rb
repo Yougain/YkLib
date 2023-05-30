@@ -108,7 +108,7 @@ DEBUG_FILES = {}
 				end
 				return ret
 			end
-			if !@@onStack.empty? && !@@onStack[-1]
+			if !@@onStack.empty? && !@@onStack.detect{_1}
 				return TZDebug.new
 			end
 			noLn = noTitle = false
