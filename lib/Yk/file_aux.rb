@@ -610,14 +610,14 @@ module FileUtils
 		File.mkfifo(name, mode)
 	end
   end
-  def copy_entry(src, dest, preserve = false, dereference_root = false)
+  def cpy_entry(src, dest, preserve = false, dereference_root = false)
     Entry_.new(src, nil, dereference_root).traverse do |ent|
       destent = Entry_.new(dest, ent.rel, false)
       ent.copy destent.path
       ent.lcopy_metadata destent.path if preserve
     end
   end
-  def copy_stat(src, dest, preserve = true, dereference_root = false)
+  def cpy_stat(src, dest, preserve = true, dereference_root = false)
     Entry_.new(src, nil, dereference_root).traverse do |ent|
       destent = Entry_.new(dest, ent.rel, false)
       ent.lcopy_metadata destent.path if preserve
@@ -637,8 +637,8 @@ module FileUtils
         File.lchmod st.mode, path
       end
   end
-	module_function :copy_entry
-	module_function :copy_stat
+	module_function :cpy_entry
+	module_function :cpy_stat
 	module_function :cp_stat
 end
 
