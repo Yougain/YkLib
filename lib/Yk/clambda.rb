@@ -250,7 +250,7 @@ end
 
 0.upto 20 do |i|
 	eval %{
-		def _#{i}
+		def __#{i}
 			return TZLambda::PlaceHolder#{i}
 		end
 	}
