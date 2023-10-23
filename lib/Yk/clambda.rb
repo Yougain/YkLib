@@ -218,7 +218,7 @@ class Object
 	def __l_to_lambda__
 		TZLambda::FixedElem.new self
 	end
-	def _I *lexprs
+	def __I *lexprs
 		return unless bnd = caller_binding
 		obj = bnd.eval("self") == self ? nil : self
 		if lexprs.size == 0
@@ -229,7 +229,7 @@ class Object
 	end
 	[[:a, ?@], [:d, ?$]].each do |s, m|
 		class_eval %{
-			def _I#{s.to_s}
+			def __I#{s.to_s}
 				return unless bnd = caller_binding
 				obj = bnd.eval("self") == self ? nil : self
 				TZLambda::MethodCall.new bnd, obj, #{m.inspect}.chr
@@ -238,7 +238,7 @@ class Object
 	end
 	[["!", ", :replace"], ["", ""]].each do |s, f|
 		class_eval %{
-			def _L#{s}
+			def __L#{s}
 				return unless bnd = caller_binding
 				obj = bnd.eval("self") == self ? nil : self
 				TZLambda::CallBlock.new bnd, obj#{f}
@@ -285,25 +285,25 @@ if $0 == __FILE__
 	p "Q"._?._e?.inspect
 	p "asdf"._e?
 	clause __.a + __0 + __1._?._e?.__it.to_s do |c|
-		p "test"._I(c, c).call "asdf"
+		p "test".__I(c, c).call "asdf"
 	end
 	e = __FILE__
-	clause _0.expand_path.write_la _1.ln do |c|
+	clause __0.expand_path.write_la __1.ln do |c|
 		p c
-		"~/.command_arg_files.test"._I.c e
+		"~/.command_arg_files.test".__I.c e
 		if e._d? || e._!.dirname._d?
-			"~/.command_arg_dirs.test"._I.c e
+			"~/.command_arg_dirs.test".__I.c e
 		end
 	end
 	a = [1, 2, 3]
 	p a
-	a._L!.map(100 + _1)
+	a.__L!.map(100 + __1)
 	p a
-	p _L.fold(:+)
+	p __L.fold(:+)
 	a = __.test __1, __2
-	p _I.a 5, 6
-	p _I(a, a).call 7, 8
-	p [?a, ?b, ?c]._L!.map("Z" + _1)
+	p __I.a 5, 6
+	p __I(a, a).call 7, 8
+	p [?a, ?b, ?c].__L!.map("Z" + __1)
 end
 
 

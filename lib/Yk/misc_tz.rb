@@ -391,6 +391,10 @@ class Array
 	end
 end
 
+def clause *args
+	yield *args
+end
+
 
 module Code
 	refine Kernel do
