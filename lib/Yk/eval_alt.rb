@@ -162,10 +162,11 @@ end
 class BasicObject
 	alias_method :__org_instance_eval, :instance_eval
 	def instance_eval expr = nil, fname = "(eval)", lno = 1, &bl
-		prc =  Proc.new{ |e, f, lno, bl|
+		prc =  ::Proc.new{ |e, f, lno, bl|
 			e = __translate__ e, f, lno, bl, :instance, self
 			if bl
-				__org_instance_eval f, lno, &bl if !e
+				#__org_instance_eval f, lno, &bl if !e
+				__org_instance_eval &bl if !e
 			elsif e
 				__org_instance_eval e, f, lno
 			end
