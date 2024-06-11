@@ -107,7 +107,6 @@ require 'Yk/misc_tz'
 					#	fr.set_write_io fw
 					#	fp = fr
 				else
-					p
 					if fmode.encode
 						fr, fw = IO.pipe fmode.encode
 					else
