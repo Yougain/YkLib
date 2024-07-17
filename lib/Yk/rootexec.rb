@@ -29,7 +29,7 @@ end
 
 if !CYGWIN
 	if Process.euid != 0
-		if (File.executable?(tmp = "/usr/sbin/cansudo") && system(tmp) && $? == 0 && STDIN.tty?) or "/etc/group".read =~ /\nwheel|sudo:.*\b(#{Regexp.escape Etc.getpwuid(Process.euid).name})\b/
+		if (File.executable?(tmp = "/usr/sbin/cansudo") && system(tmp) && $? == 0 && STDIN.tty?) or File.exist?("/data/data/com.termux") or "/etc/group".read =~ /\nwheel|sudo:.*\b(#{Regexp.escape Etc.getpwuid(Process.euid).name})\b/
 				exec "sudo", $0, *ARGV
 		else
 			exec "su",  "-c",  "#{$0} #{ARGV.condSQuote}"

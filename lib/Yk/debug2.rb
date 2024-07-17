@@ -495,9 +495,15 @@ else
 		def method_missing *args
 			return
 		end
+		def self.method_missing *args, **opts, &bl
+			return
+		end
+		def self.> arg
+			return nil
+		end
 	end
 	def p *args
-		return TZDebug.new
+		TZDebug
 	end
 
 end

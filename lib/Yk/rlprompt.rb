@@ -1,5 +1,5 @@
 
-require 'readline.so'
+require 'readline'
 
 class String
 	def prompt (echo = true)
