@@ -1,5 +1,4 @@
 
-require 'readline'
 
 class String
 	def prompt (echo = true)
@@ -48,7 +47,9 @@ class String
 		end
 		system "stty -echo"
 		begin
-			res = Readline.readline(prpt)
+			STDERR.write self.chomp + " "
+			STDERR.flush
+			res = STDIN.gets.chomp
 		ensure
 			system "stty echo"
 		end

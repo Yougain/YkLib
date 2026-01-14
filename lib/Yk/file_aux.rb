@@ -218,7 +218,7 @@ require 'Yk/misc_tz'
 							ret = __org_open_____(f, mstd, perm)
 							ret
 						elsif fmode.sys? || fmode.nonblock?
-							ret = IO.for_fd(IO.sysopen(f, m.to_i | File::NONBLOCK, perm), m.std_mode)
+							ret = File.for_fd(IO.sysopen(f, m.to_i | File::NONBLOCK, perm), m.std_mode)
 							ret
 						else
 							fp = __org_open_____ f, m.std_mode, perm
