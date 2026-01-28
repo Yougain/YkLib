@@ -1,4 +1,5 @@
-
+if !$FileClassModified
+	$FileClassModified = true
 
 require 'pathname'
 require 'Yk/__defun__'
@@ -816,3 +817,4 @@ class File
 end
 
 
+end

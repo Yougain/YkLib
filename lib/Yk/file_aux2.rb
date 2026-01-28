@@ -1,3 +1,5 @@
+if !$FileClassModified
+	$FileClassModified = true
 
 
 
@@ -171,7 +173,7 @@ end
 				writeFile = nil
 				getFp = Proc.new do |m|
 					if fmode.sys?
-						IO.for_fd IO.sysopen(f, m.to_i, perm)
+						File.for_fd IO.sysopen(f, m.to_i, perm)
 					else
 						__org_open_____ f, m.to_i, perm
 					end
@@ -914,3 +916,4 @@ end
 
 
 
+end
